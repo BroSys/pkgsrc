@@ -759,6 +759,14 @@ PREPEND_PATH+=		${X11BASE}/bin
 .endif
 PREPEND_PATH+=		${LOCALBASE}/bin
 
+# Support alternative init systems.
+#
+INIT_SYSTEM?=		rc.d
+.if ${INIT_SYSTEM} == "smf"
+.  include "smf.mk"
+.endif
+_BUILD_DEFS+=		INIT_SYSTEM
+
 # Wrapper framework definitions
 .include "wrapper/wrapper-defs.mk"
 
